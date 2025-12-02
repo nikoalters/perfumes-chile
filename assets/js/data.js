@@ -13,12 +13,12 @@ const lote1 = [
   { id: 9, nombre: "Afnan  Turathi 90ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Turathi Blue.jpg" },
   
   
-  { id: 13, nombre: "Al Harramain Haramain Amber Oud Golden Edition Edp 120ml", precio: 50000, categoria: "unisex", imagen: "assets/img/logo.jpg" },
+  { id: 13, nombre: "Al Harramain Haramain Amber Oud Golden Edition Edp 120ml", precio: 50000, categoria: "unisex", imagen: "assets/img/Amber Oud Gold Edition.jpg" },
 
-  { id: 15, nombre: "Antonio Banderas Mediterraneo Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
+  { id: 15, nombre: "Antonio Banderas Mediterraneo Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Antonio Banderas Mediterraneo.jpg" },
   { id: 16, nombre: "Antonio Banderas Black Seduction Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
   { id: 17, nombre: "Antonio Banderas The Icon Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 18, nombre: "Antonio Banderas Mediterraneo Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
+  { id: 18, nombre: "Antonio Banderas Mediterraneo Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Antonio Banderas Mediterraneo.jpg" },
   { id: 19, nombre: "Antonio Banderas King Of Seduction Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
   { id: 20, nombre: "Antonio Banderas The Icon Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
   { id: 21, nombre: "Antonio Banderas King Of Seduction Absoluteedt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
