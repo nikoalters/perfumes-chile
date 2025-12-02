@@ -1,0 +1,275 @@
+/* assets/css/styles.css */
+
+:root {
+    --color-principal: #009970;
+    --color-hover: #00b383;
+    --color-texto: #333;
+    --fondo-suave: #f8f9fa;
+    --color-borde: #e9ecef;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--fondo-suave);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Navbar --- */
+.navbar {
+    background-color: white !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: var(--color-principal) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.btn-login {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background-color: var(--color-hover);
+    color: white;
+}
+
+/* --- Hero Banner --- */
+.hero-banner {
+    background: linear-gradient(135deg, #009970 0%, #006349 100%);
+    height: 300px;
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 153, 112, 0.3);
+}
+
+.hero-banner h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-banner p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+}
+
+/* --- SIDEBAR DE FILTROS (MEJORADO CON SCROLL INTERNO) --- */
+.sidebar-filtros {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    /* MAGIA: Esto hace que el menú se quede fijo y tenga scroll propio */
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    /* Altura máxima pantalla menos cabecera */
+    overflow-y: auto;
+    /* Scroll vertical si es muy largo */
+}
+
+/* Estilo para la barra de scroll bonita */
+.sidebar-filtros::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-filtros::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.sidebar-filtros::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.sidebar-filtros::-webkit-scrollbar-thumb:hover {
+    background: var(--color-principal);
+}
+
+.filtro-grupo {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.filtro-grupo:last-child {
+    border-bottom: none;
+}
+
+.filtro-titulo {
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+    color: var(--color-texto);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-principal);
+    border-color: var(--color-principal);
+}
+
+/* --- Cards de Productos --- */
+.card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: contain;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.badge-ml {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.btn-agregar {
+    background-color: var(--color-principal);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color-hover);
+    color: white;
+}
+
+/* --- Footer --- */
+.footer-pro {
+    background-color: #111;
+    color: #bbb;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+.footer-pro h5 {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-pro a {
+    color: #bbb;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-pro a:hover {
+    color: var(--color-principal);
+    padding-left: 5px;
+}
+
+.social-icon {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: #fff !important;
+    display: inline-block !important;
+    margin-bottom: 0 !important;
+}
+
+.social-icon:hover {
+    color: var(--color-principal) !important;
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    background-color: #000;
+    padding: 15px 0;
+    font-size: 0.8rem;
+    border-top: 1px solid #333;
+}
+
+/* --- ANIMACIONES Y DETALLES EXTRA --- */
+
+/* 1. Animación de entrada suave (Fade In) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        /* Empieza un poco más abajo */
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        /* Termina en su lugar */
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    /* Dura 0.6 segundos */
+}
+
+/* 2. Scrollbar (Barra de desplazamiento) personalizada para toda la web */
+/* Esto hace que la barra lateral gris fea del navegador se vea verde y delgada */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-principal);
+    /* Se pone verde al tocarla */
+}
+
+/* 3. Efecto "Glass" (Vidrio) en el Navbar */
+/* Hace que el menú de arriba sea un poquito transparente */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+}

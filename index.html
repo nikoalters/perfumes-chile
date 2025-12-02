@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumes Chile - Catálogo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/logo.jpg" width="30" height="30" class="d-inline-block align-top rounded-circle"
+                    alt="">
+                Perfumes Chile
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="d-flex mx-auto my-2 my-lg-0" role="search" onsubmit="return false;">
+                    <input id="input-buscador" class="form-control me-2" type="search"
+                        placeholder="🔍 Buscar perfume..." aria-label="Search" style="width: 300px;">
+                </form>
+
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="filtrarDesdeMenu('hombre')">Hombres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="filtrarDesdeMenu('mujer')">Mujeres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="filtrarDesdeMenu('unisex')">Unisex</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-outline-dark position-relative" data-bs-toggle="modal"
+                            data-bs-target="#modalCarrito">
+                            🛒 Carrito
+                            <span id="contador-carrito"
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="login.html" class="btn-login">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-banner">
+        <div class="container">
+            <h1>✨ Oferta Especial</h1>
+            <p>Descubre las fragancias más exclusivas con hasta un <strong>50% de descuento</strong></p>
+
+            <button onclick="verCatalogoCompleto()" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold shadow-sm">
+                Ver Catálogo Completo
+            </button>
+        </div>
+    </header>
+
+    <div class="container mb-5">
+
+        <button class="btn btn-primary w-100 d-lg-none mb-3 fw-bold" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#sidebarFiltros">
+            🌪️ Abrir Filtros
+        </button>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sidebarFiltros">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title fw-bold">Filtrar por:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            data-bs-target="#sidebarFiltros"></button>
+                    </div>
+                    <div class="offcanvas-body p-0">
+                        <div class="sidebar-filtros w-100">
+                            <h4 class="mb-4 d-none d-lg-block">⚡ Filtros</h4>
+
+                            <div class="filtro-grupo">
+                                <span class="filtro-titulo">Género</span>
+                                <div class="form-check">
+                                    <input class="form-check-input filtro-genero" type="checkbox" value="hombre"
+                                        id="checkHombre">
+                                    <label class="form-check-label" for="checkHombre">Hombre</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filtro-genero" type="checkbox" value="mujer"
+                                        id="checkMujer">
+                                    <label class="form-check-label" for="checkMujer">Mujer</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input filtro-genero" type="checkbox" value="unisex"
+                                        id="checkUnisex">
+                                    <label class="form-check-label" for="checkUnisex">Unisex</label>
+                                </div>
+                            </div>
+
+                            <div class="filtro-grupo">
+                                <span class="filtro-titulo">Precio Máximo: <span id="precio-valor"
+                                        class="text-success">$150.000</span></span>
+                                <input type="range" class="form-range" min="0" max="150000" step="5000" id="rangoPrecio"
+                                    value="150000">
+                            </div>
+
+                            <div class="filtro-grupo">
+                                <span class="filtro-titulo">Marca</span>
+                                <select class="form-select form-select-sm" id="selectMarca">
+                                    <option value="todas">Todas las marcas</option>
+                                </select>
+                            </div>
+
+                            <div class="filtro-grupo">
+                                <span class="filtro-titulo">Tamaño (ML)</span>
+                                <select class="form-select form-select-sm" id="selectML">
+                                    <option value="todos">Todos los tamaños</option>
+                                    <option value="30">30 ml</option>
+                                    <option value="50">50 ml</option>
+                                    <option value="80">80 - 90 ml</option>
+                                    <option value="100">100 - 125 ml</option>
+                                    <option value="200">150 - 200 ml</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-outline-danger w-100 btn-sm" onclick="limpiarFiltros()">🗑️ Borrar
+                                Filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="text-muted">Resultados: <span id="cantidad-resultados" class="fw-bold text-dark">0</span>
+                        perfumes</h5>
+                </div>
+                <div class="row" id="contenedor-productos">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="nosotros" class="container my-5 py-5 border-top">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-md-2">
+                <h2 class="fw-bold mb-3" style="color: var(--color-principal);">¿Quiénes Somos?</h2>
+                <p class="lead text-muted">
+                    Somos una empresa dedicada a la venta de perfumes <strong>100% originales</strong>.
+                </p>
+                <div class="mt-4 p-3 bg-light rounded border shadow-sm">
+                    <h5 class="mb-3">📲 ¡Hablemos!</h5>
+                    <p class="mb-1"><strong>WhatsApp:</strong> +56 9 5854 7236</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="https://instagram.com/perfumeschile" target="_blank"
+                            class="btn btn-outline-danger btn-sm">
+                            📸 @perfumeschile
+                        </a>
+                        <a href="https://facebook.com/perfumes.originaleschile" target="_blank"
+                            class="btn btn-outline-primary btn-sm">
+                            👍 Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-1 text-center mb-4 mb-md-0">
+                <img src="assets/img/madre4.jpg" alt="Equipo Perfumes Chile" class="img-fluid rounded shadow-lg"
+                    style="max-height: 400px; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold" style="color: var(--color-principal);">
+                📦 Clientes Felices
+            </h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 text-center pt-4">
+                            <img src="assets/img/logo.jpg" class="rounded-circle border" width="60" height="60"
+                                style="object-fit: cover;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Camila A.</h5>
+                            <div class="text-warning mb-2">⭐⭐⭐⭐⭐</div>
+                            <p class="card-text fst-italic">"Me encantó, llegó súper rápido a mi casa y el perfume venía
+                                sellado. 100% recomendados."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 text-center pt-4">
+                            <img src="assets/img/logo.jpg" class="rounded-circle border" width="60" height="60"
+                                style="object-fit: cover;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jorge M.</h5>
+                            <div class="text-warning mb-2">⭐⭐⭐⭐⭐</div>
+                            <p class="card-text fst-italic">"Los precios son increíbles. Compré el Eros de Versace y me
+                                ahorré como 30 mil pesos."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 text-center pt-4">
+                            <img src="assets/img/logo.jpg" class="rounded-circle border" width="60" height="60"
+                                style="object-fit: cover;">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Valentina S.</h5>
+                            <div class="text-warning mb-2">⭐⭐⭐⭐⭐</div>
+                            <p class="card-text fst-italic">"Excelente atención por WhatsApp, me ayudaron a elegir el
+                                regalo perfecto para mi mamá."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-pro pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/img/logo.jpg" alt="Logo" width="40" height="40" class="rounded-circle me-2">
+                        <h5 class="m-0 text-white">Perfumes Chile</h5>
+                    </div>
+                    <p>Tu tienda de confianza para fragancias 100% originales.</p>
+                    <div class="mt-3">
+                        <a href="https://instagram.com/perfumeschile" target="_blank" class="social-icon">📸
+                            Instagram</a>
+                        <a href="https://facebook.com/perfumes.originaleschile" target="_blank" class="social-icon">👍
+                            Facebook</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Navegación</h5>
+                    <a href="#" onclick="filtrarDesdeMenu('hombre')">🔹 Perfumes Hombre</a>
+                    <a href="#" onclick="filtrarDesdeMenu('mujer')">🔹 Perfumes Mujer</a>
+                    <a href="#" onclick="filtrarDesdeMenu('unisex')">🔹 Perfumes Unisex</a>
+                    <a href="#nosotros">🔹 Sobre Nosotros</a>
+                    <a href="login.html">🔹 Acceso Admin</a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contáctanos</h5>
+                    <p class="mb-2">📍 Santiago, Chile</p>
+                    <p class="mb-2">📱 +56 9 5854 7236</p>
+                    <p class="mb-2">📧 contacto@perfumeschile.cl</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-md-start">
+                        &copy; 2025 <strong>Perfumes Chile</strong>.
+                    </div>
+                    <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                        <span class="text-muted small">Desarrollado con ❤️ en Chile</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="modalCarrito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tu Carrito de Compras 🛍️</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="contenido-carrito-modal">
+                    <p class="text-center text-muted">Tu carrito está vacío.</p>
+                </div>
+                <div class="modal-footer d-flex flex-column align-items-stretch">
+                    <div class="mb-3 w-100">
+                        <label for="cliente-nombre" class="form-label fw-bold">Nombre del Cliente:</label>
+                        <input type="text" class="form-control" id="cliente-nombre" placeholder="Ej: Juan Pérez">
+                    </div>
+                    <div class="mb-3 w-100">
+                        <label for="cliente-direccion" class="form-label fw-bold">Dirección de Envío (Opcional):</label>
+                        <input type="text" class="form-control" id="cliente-direccion"
+                            placeholder="Ej: Av. Pajaritos 1234, Maipú">
+                    </div>
+                    <div class="d-flex justify-content-between w-100 mt-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir mirando</button>
+                        <button type="button" class="btn btn-success flex-grow-1 ms-2"
+                            onclick="finalizarCompraWhatsApp()">
+                            Finalizar Compra por WhatsApp 📲
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
