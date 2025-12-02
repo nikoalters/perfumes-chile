@@ -16,17 +16,17 @@ const lote1 = [
   { id: 13, nombre: "Al Harramain Haramain Amber Oud Golden Edition Edp 120ml", precio: 50000, categoria: "unisex", imagen: "assets/img/Amber Oud Gold Edition.jpg" },
 
   { id: 15, nombre: "Antonio Banderas Mediterraneo Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Antonio Banderas Mediterraneo.jpg" },
-  { id: 16, nombre: "Antonio Banderas Black Seduction Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 17, nombre: "Antonio Banderas The Icon Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
+  { id: 16, nombre: "Antonio Banderas Black Seduction Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Black Seduction.jpg" },
+  { id: 17, nombre: "Antonio Banderas The Icon Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/The Icon.jpg" },
   { id: 18, nombre: "Antonio Banderas Mediterraneo Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Antonio Banderas Mediterraneo.jpg" },
-  { id: 19, nombre: "Antonio Banderas King Of Seduction Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 20, nombre: "Antonio Banderas The Icon Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 21, nombre: "Antonio Banderas King Of Seduction Absoluteedt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 22, nombre: "Antonio Banderas The Icon Edp 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 23, nombre: "Antonio Banderas The Icon Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
+  { id: 19, nombre: "Antonio Banderas King Of Seduction Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/King Of Seduction.jpg" },
+  { id: 20, nombre: "Antonio Banderas The Icon Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/The Icon.jpg" },
+  { id: 21, nombre: "Antonio Banderas King Of Seduction Absoluteedt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/King of Seduction Absolute.jpg" },
+  { id: 22, nombre: "Antonio Banderas The Icon Edp 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/The Icon Eau de Parfum.jpg" },
+  { id: 23, nombre: "Antonio Banderas The Icon Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/The Icon Eau de Parfum.jpg" },
   { id: 24, nombre: "Antonio Banderas King Of Seduction Absolute Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 25, nombre: "Antonio Banderas The Secrets Flame Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/logo.jpg" },
-  { id: 26, nombre: "Antonio Banderas Blue Seduction Edt 200ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
+  
+  { id: 26, nombre: "Antonio Banderas Blue Seduction Edt 200ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Blue Seduction.jpg" },
   { id: 27, nombre: "Antonio Banderas Her Secret Desire Edt 80ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
   { id: 28, nombre: "Antonio Banderas The Icon Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
   { id: 29, nombre: "Antonio Banderas Her Secrets Flame Edt 80ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
@@ -505,7 +505,7 @@ const productosBase = [...lote1, ...lote2, ...lote3];
 
 // Función para cargar los datos en el navegador y limpiar versiones viejas
 function inicializarDatos() {
-    const versionActual = "v_490_productos1"; // Cambiamos la versión para forzar actualización
+    const versionActual = "v_490_productos"; // Cambiamos la versión para forzar actualización
     
     if (localStorage.getItem("version_db") !== versionActual) {
         console.log("Detectada nueva versión del catálogo. Actualizando...");
