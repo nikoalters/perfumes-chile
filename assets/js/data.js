@@ -31,7 +31,7 @@ const lote1 = [
   { id: 28, nombre: "Antonio Banderas The Icon Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/The Icon Women.jpg" },
   { id: 29, nombre: "Antonio Banderas Her Secrets Flame Edt 80ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
   { id: 30, nombre: "Ariana Grande Ari Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/ari.jpg" },
-  { id: 31, nombre: "Ariana Grande Sweet Like A Candy 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Sweet like candy.jpg" },
+  { id: 31, nombre: "Ariana Grande Sweet Like A Candy 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Sweet like candy .jpg" },
   { id: 32, nombre: "Ariana Grande Cloud Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Ariana Grande Cloud.jpg" },
   { id: 33, nombre: "Ariana Grande Thank U Next Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Thank U.jpg" },
   { id: 34, nombre: "Ariana Grande Moonlight 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/moonlight.jpg" },
