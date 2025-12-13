@@ -501,7 +501,7 @@ const productosBase = [...lote1, ...lote2, ...lote3];
 
 // Función para cargar los datos en el navegador y limpiar versiones viejas
 function inicializarDatos() {
-    const versionActual = "v_490_productos1"; // Cambiamos la versión para forzar actualización
+    const versionActual = "v_490_productos"; // Cambiamos la versión para forzar actualización
     
     if (localStorage.getItem("version_db") !== versionActual) {
         console.log("Detectada nueva versión del catálogo. Actualizando...");
