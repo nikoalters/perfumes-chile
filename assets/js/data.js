@@ -111,7 +111,7 @@ const lote1 = [
   { id: 111, nombre: "Calvin Klein Eternity Summer Daze Edt 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/International Self-Care Day + Day Plan.jpg" },
   { id: 112, nombre: "Calvin Klein Defy Calvin Edt 50ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Calvin Klein Defy Eau de Toilette.jpg" },
   { id: 113, nombre: "Calvin Klein Defy Calvin Edt 200ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Calvin Klein Defy Eau de Toilette.jpg" },
-  { id: 114, nombre: "Calvin Klein one Shock Edt 200ml", precio: 50000, categoria: "mujer", imagen: "assets / img / CK One Shock For Her.jpg" },
+  { id: 114, nombre: "Calvin Klein one Shock Edt 200ml", precio: 50000, categoria: "mujer", imagen: "assets/img/ CK One Shock For Her.jpg" },
   { id: 115, nombre: "Calvin Klein Euphoria Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/EUPHORIA CALVIN KLEIN 100ML.jpg" },
   { id: 116, nombre: "Calvin Klein Eternity Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Calvin Klein - Eau de Parfum Eternity.jpg" },
   { id: 117, nombre: "Calvin Klein Contradiction Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Contradiction Perfume for Women.jpg" },
@@ -534,3 +534,10 @@ function eliminarProductoDB(id) {
 
 // Ejecutar la inicialización
 inicializarDatos();
+
+
+
+function formatearPeso(valor) {
+    // Convierte el número a formato chileno y le agrega el signo $
+    return '$' + Number(valor).toLocaleString('es-CL');
+}

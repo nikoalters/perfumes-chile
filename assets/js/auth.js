@@ -2,11 +2,11 @@
 
 // 1. Configuración (Simulada)
 const USUARIO_ADMIN = "admin";
-const PASS_ADMIN = "ValeNico"; // Puedes cambiar tu clave aquí
+const PASS_ADMIN_ENCRIPTADA = "VmFsZU5pY28="; 
 
 // 2. Función Login (MEJORADA CON SWEETALERT)
 function iniciarSesion(usuario, password) {
-    if (usuario === USUARIO_ADMIN && password === PASS_ADMIN) {
+    if (usuario === USUARIO_ADMIN && btoa(password) === PASS_ADMIN_ENCRIPTADA) {
         // Guardamos el token
         sessionStorage.setItem('usuario_logueado', 'true');
         

@@ -22,18 +22,20 @@ const MARCAS_CONOCIDAS = [
 
 // --- 1. LÓGICA DE RENDERIZADO OPTIMIZADA ---
 
+/* REEMPLAZA TU FUNCIÓN renderizarCatalogo POR ESTA: */
+
 function renderizarCatalogo() {
     const productos = obtenerProductos(); 
     const contenedor = document.getElementById('contenedor-productos');
     
-    // 1. Obtener valores
+    // 1. Obtener valores de los filtros
     const textoBusqueda = document.getElementById('input-buscador').value.toLowerCase();
     const precioMax = Number(document.getElementById('rangoPrecio').value);
     const marcaSeleccionada = document.getElementById('selectMarca').value;
     const mlSeleccionado = document.getElementById('selectML').value;
     const generosSeleccionados = Array.from(document.querySelectorAll('.filtro-genero:checked')).map(cb => cb.value);
 
-    // 2. Filtrar
+    // 2. Filtrar productos (Esta lógica no cambia)
     const productosFiltrados = productos.filter(prod => {
         const nombre = prod.nombre.toLowerCase();
         
@@ -61,36 +63,14 @@ function renderizarCatalogo() {
     const contadorEl = document.getElementById('cantidad-resultados');
     if(contadorEl) contadorEl.innerText = productosFiltrados.length;
 
-    // 4. DIBUJAR EN DOM
+    // 4. DIBUJAR EN DOM (¡Aquí está la magia de la limpieza!)
     if (productosFiltrados.length === 0) {
         contenedor.innerHTML = '<div class="col-12 text-center py-5"><h3>😕 No hay resultados</h3><p>Intenta ajustar tus filtros.</p></div>';
         return;
     }
 
-    const htmlString = productosFiltrados.map(producto => {
-        const mlDisplay = extraerML(producto.nombre) ? `${extraerML(producto.nombre)}ml` : '';
-        
-        return `
-            <div class="col-md-4 col-sm-6 mb-4 fade-in">
-                <div class="card h-100 shadow-sm position-relative">
-                    ${mlDisplay ? `<div class="badge-ml">${mlDisplay}</div>` : ''}
-                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}" loading="lazy">
-                    <div class="card-body d-flex flex-column">
-                        <small class="text-muted text-uppercase mb-1" style="font-size:0.7rem">${producto.categoria}</small>
-                        <h6 class="card-title text-truncate" title="${producto.nombre}">${producto.nombre}</h6>
-                        <div class="mt-auto">
-                            <p class="card-text fw-bold text-success fs-5 mb-2">
-                                $${producto.precio.toLocaleString('es-CL')}
-                            </p>
-                            <button class="btn btn-agregar" onclick="agregarAlCarrito(${producto.id})">
-                                Añadir 🛒
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
+    // Usamos la nueva función "crearTarjetaHTML" que hicimos abajo
+    const htmlString = productosFiltrados.map(crearTarjetaHTML).join('');
 
     contenedor.innerHTML = htmlString;
 }
@@ -242,7 +222,7 @@ function renderizarCarritoEnModal() {
                     <img src="${prod.imagen}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
                     <div style="line-height: 1.2;">
                         <small class="fw-bold d-block text-truncate" style="max-width: 180px;">${prod.nombre}</small>
-                        <small class="text-muted">$${prod.precio.toLocaleString('es-CL')}</small>
+                        <small class="text-muted">${formatearPeso(prod.precio)}</small>
                     </div>
                 </div>
                 <button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="eliminarDelCarrito(${index})">×</button>
@@ -251,7 +231,7 @@ function renderizarCarritoEnModal() {
         total += prod.precio;
     });
     html += '</ul>';
-    html += `<div class="d-flex justify-content-between fw-bold border-top pt-2"><span>Total:</span><span>$${total.toLocaleString('es-CL')}</span></div>`;
+    html += `<div class="d-flex justify-content-between fw-bold border-top pt-2"><span>Total:</span><span>${formatearPeso(total)}</span></div>`;
     
     contenedor.innerHTML = html;
 }
@@ -286,4 +266,45 @@ window.finalizarCompraWhatsApp = function() {
     
     const numero = "56958547236"; 
     window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+}
+
+/* AGREGAR AL FINAL DE assets/js/app.js */
+
+function crearTarjetaHTML(producto) {
+    // Calculamos si tiene ML para mostrar la etiqueta
+    const mlDisplay = extraerML(producto.nombre) ? `${extraerML(producto.nombre)}ml` : '';
+    
+    // Devolvemos el HTML limpio
+    return `
+        <div class="col-md-4 col-sm-6 mb-4 fade-in">
+            <div class="card h-100 shadow-sm position-relative">
+                ${mlDisplay ? `<div class="badge-ml">${mlDisplay}</div>` : ''}
+                
+                <img 
+                    src="${producto.imagen}" 
+                    class="card-img-top" 
+                    alt="${producto.nombre}" 
+                    loading="lazy"
+                    onerror="this.onerror=null; this.src='assets/img/logo.jpg';"
+                >
+                
+                <div class="card-body d-flex flex-column">
+                    <small class="text-muted text-uppercase mb-1" style="font-size:0.7rem">
+                        ${producto.categoria}
+                    </small>
+                    <h6 class="card-title text-truncate" title="${producto.nombre}">
+                        ${producto.nombre}
+                    </h6>
+                    <div class="mt-auto">
+                        <p class="card-text fw-bold text-success fs-5 mb-2">
+                            ${formatearPeso(producto.precio)}
+                        </p>
+                        <button class="btn btn-agregar" onclick="agregarAlCarrito(${producto.id})">
+                            Añadir 🛒
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }

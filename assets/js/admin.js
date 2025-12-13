@@ -22,7 +22,7 @@ function actualizarEstadisticas() {
     
     // Formateamos como dinero chileno
     document.getElementById('stat-total-dinero').innerText = 
-        '$' + totalDinero.toLocaleString('es-CL');
+        formatearPeso(totalDinero);
 }
 
 // 1. FUNCIÓN PARA MOSTRAR LA TABLA
@@ -52,7 +52,7 @@ function renderizarTabla() {
                         ${prod.categoria}
                     </span>
                 </td>
-                <td class="fw-bold text-success">$${prod.precio.toLocaleString('es-CL')}</td>
+                <td class="fw-bold text-success">${formatearPeso(prod.precio)}</td>
                 <td>
                     <button class="btn btn-outline-danger btn-sm rounded-circle" onclick="borrar(${prod.id})" title="Eliminar">
                         🗑️
