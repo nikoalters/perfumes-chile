@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFiltros(); 
 });
 
+let limiteProductos = 20; // Empezamos mostrando solo 20
 // --- LISTA DE MARCAS ---
 const MARCAS_CONOCIDAS = [
     "ADOLFO DOMINGUEZ", "AFNAN", "AL HARAMAIN", "ANTONIO BANDERAS", "ARIANA GRANDE", 
@@ -24,29 +25,26 @@ const MARCAS_CONOCIDAS = [
 
 /* REEMPLAZA TU FUNCIÓN renderizarCatalogo POR ESTA: */
 
+/* REEMPLAZA renderizarCatalogo POR ESTA VERSIÓN FINAL: */
 function renderizarCatalogo() {
     const productos = obtenerProductos(); 
     const contenedor = document.getElementById('contenedor-productos');
     
-    // 1. Obtener valores de los filtros
+    // 1. Obtener valores
     const textoBusqueda = document.getElementById('input-buscador').value.toLowerCase();
     const precioMax = Number(document.getElementById('rangoPrecio').value);
     const marcaSeleccionada = document.getElementById('selectMarca').value;
     const mlSeleccionado = document.getElementById('selectML').value;
     const generosSeleccionados = Array.from(document.querySelectorAll('.filtro-genero:checked')).map(cb => cb.value);
 
-    // 2. Filtrar productos (Esta lógica no cambia)
+    // 2. Filtrar (Esto sigue igual)
     const productosFiltrados = productos.filter(prod => {
         const nombre = prod.nombre.toLowerCase();
-        
         if (!nombre.includes(textoBusqueda)) return false;
         if (prod.precio > precioMax) return false;
         if (generosSeleccionados.length > 0 && !generosSeleccionados.includes(prod.categoria)) return false;
-
-        if (marcaSeleccionada !== 'todas') {
-            if (!nombre.toUpperCase().includes(marcaSeleccionada.toUpperCase())) return false;
-        }
-
+        if (marcaSeleccionada !== 'todas' && !nombre.toUpperCase().includes(marcaSeleccionada.toUpperCase())) return false;
+        
         if (mlSeleccionado !== 'todos') {
             const mlEnNombre = extraerML(prod.nombre);
             if (mlSeleccionado === "30" && mlEnNombre > 35) return false;
@@ -55,22 +53,38 @@ function renderizarCatalogo() {
             if (mlSeleccionado === "100" && (mlEnNombre < 96 || mlEnNombre > 125)) return false;
             if (mlSeleccionado === "200" && mlEnNombre < 126) return false;
         }
-
         return true;
     });
 
-    // 3. Actualizar contador
+    // 3. Actualizar contador total
     const contadorEl = document.getElementById('cantidad-resultados');
     if(contadorEl) contadorEl.innerText = productosFiltrados.length;
 
-    // 4. DIBUJAR EN DOM (¡Aquí está la magia de la limpieza!)
+    // 4. PAGINACIÓN (La magia ocurre aquí)
+    
+    // Si no hay resultados
     if (productosFiltrados.length === 0) {
         contenedor.innerHTML = '<div class="col-12 text-center py-5"><h3>😕 No hay resultados</h3><p>Intenta ajustar tus filtros.</p></div>';
         return;
     }
 
-    // Usamos la nueva función "crearTarjetaHTML" que hicimos abajo
-    const htmlString = productosFiltrados.map(crearTarjetaHTML).join('');
+    // Cortamos el array: solo mostramos desde el 0 hasta el "limiteProductos"
+    const productosVisibles = productosFiltrados.slice(0, limiteProductos);
+
+    // Renderizamos solo esos
+    let htmlString = productosVisibles.map(crearTarjetaHTML).join('');
+
+    // Si todavía quedan productos por mostrar (hay más filtrados que visibles)
+    if (productosFiltrados.length > limiteProductos) {
+        htmlString += `
+            <div class="col-12 text-center py-4 fade-in">
+                <p class="text-muted mb-2">Mostrando ${productosVisibles.length} de ${productosFiltrados.length} productos</p>
+                <button class="btn btn-outline-dark rounded-pill px-5 fw-bold" onclick="cargarMas()">
+                    ⬇ Ver más perfumes
+                </button>
+            </div>
+        `;
+    }
 
     contenedor.innerHTML = htmlString;
 }
@@ -96,9 +110,19 @@ function extraerML(texto) {
 
 function setupFiltros() {
     let timeout;
+    
+    // Función auxiliar para resetear paginación y filtrar
+    const ejecutarFiltro = () => {
+        limiteProductos = 20; 
+        renderizarCatalogo();
+    };
+
     const filtrarConRetraso = () => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => renderizarCatalogo(), 100);
+        timeout = setTimeout(() => {
+            limiteProductos = 20; // También aquí por si acaso
+            renderizarCatalogo();
+        }, 100);
     };
 
     document.getElementById('input-buscador').addEventListener('input', filtrarConRetraso);
@@ -107,19 +131,21 @@ function setupFiltros() {
     const precioValor = document.getElementById('precio-valor');
     
     rangoPrecio.addEventListener('input', (e) => {
-        precioValor.innerText = `$${parseInt(e.target.value).toLocaleString('es-CL')}`;
+        precioValor.innerText = formatearPeso(e.target.value); // Ya usamos la función nueva
         filtrarConRetraso();
     });
 
-    document.getElementById('selectMarca').addEventListener('change', renderizarCatalogo);
-    document.getElementById('selectML').addEventListener('change', renderizarCatalogo);
+    // En los cambios directos (Selects y Checkbox), usamos ejecutarFiltro
+    document.getElementById('selectMarca').addEventListener('change', ejecutarFiltro);
+    document.getElementById('selectML').addEventListener('change', ejecutarFiltro);
     
     document.querySelectorAll('.filtro-genero').forEach(cb => {
-        cb.addEventListener('change', renderizarCatalogo);
+        cb.addEventListener('change', ejecutarFiltro);
     });
 }
 
-window.limpiarFiltros = function() {
+window.limpiarFiltros = function () {
+    limiteProductos = 20;
     document.getElementById('input-buscador').value = '';
     document.getElementById('rangoPrecio').value = 150000;
     document.getElementById('precio-valor').innerText = '$150.000';
@@ -131,7 +157,8 @@ window.limpiarFiltros = function() {
 
 // --- NAVEGACIÓN DESDE MENÚ Y BANNER (NUEVO) ---
 
-window.filtrarDesdeMenu = function(genero) {
+window.filtrarDesdeMenu = function (genero) {
+    limiteProductos = 20;
     // 1. Limpiamos cualquier filtro previo
     window.limpiarFiltros();
 
@@ -156,7 +183,8 @@ window.filtrarDesdeMenu = function(genero) {
     }, 100);
 };
 
-window.verCatalogoCompleto = function() {
+window.verCatalogoCompleto = function () {
+    limiteProductos = 20;
     window.limpiarFiltros();
     // Scroll suave
     document.getElementById('contenedor-productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -258,17 +286,18 @@ window.finalizarCompraWhatsApp = function() {
 
     let total = 0;
     carrito.forEach(prod => {
-        mensaje += `▪️ ${prod.nombre} - $${prod.precio.toLocaleString('es-CL')}%0A`;
+        
+        mensaje += `▪️ ${prod.nombre} - ${formatearPeso(prod.precio)}%0A`;
         total += prod.precio;
     });
 
-    mensaje += `%0A💰 *TOTAL: $${total.toLocaleString('es-CL')}*`;
+    
+    mensaje += `%0A💰 *TOTAL: ${formatearPeso(total)}*`;
     
     const numero = "56958547236"; 
     window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
 }
 
-/* AGREGAR AL FINAL DE assets/js/app.js */
 
 function crearTarjetaHTML(producto) {
     // Calculamos si tiene ML para mostrar la etiqueta
@@ -308,3 +337,8 @@ function crearTarjetaHTML(producto) {
         </div>
     `;
 }
+
+window.cargarMas = function() {
+    limiteProductos += 20; // Sumamos 20 más al límite
+    renderizarCatalogo(); // Volvemos a pintar (ahora mostrará 40, luego 60, etc.)
+};
