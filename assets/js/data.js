@@ -358,8 +358,7 @@ const lote2 = [
   //{ id: 354, nombre: "Lattafa Ameer Al Oudh Edp + Spray 100+75ml", precio: 50000, categoria: "unisex", imagen: "assets/img/logo.jpg" },
   //{ id: 355, nombre: "Lattafa  Yara Edp + Spray 100 + 200ml", precio: 50000, categoria: "mujer", imagen: "assets/img/logo.jpg" },
   { id: 356, nombre: "Maison Alhambra Jean Lowe Inmortel Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Maison Alhambra Jean Lowe Immortel.jpg" },
-    {
-        id: 357, nombre: "Maison Alhambra Glacier  Pour Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Maison Alhambra - Glacier Pour Homme Eau de Parfum.jpg" },
+  {id: 357, nombre: "Maison Alhambra Glacier  Pour Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Maison Alhambra - Glacier Pour Homme Eau de Parfum.jpg" },
   { id: 358, nombre: "Maison Alhambra Glacier Ultra Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Maison Alhambra Glacier Ultra.jpg" },
   { id: 359, nombre: "Maison Alhambra Glacier Bold Edp 100ml", precio: 50000, categoria: "hombre", imagen: "assets/img/Maison Alhambra Unisex Glacier Bold Edp.jpg" },
   { id: 360, nombre: "Maison Alhambra Glacier Bella Edp 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Maison Alhambra Glacier Bella EDP Feminino.jpg" },
@@ -402,8 +401,8 @@ const lote2 = [
   { id: 397, nombre: "Paco Rabanne Olympea Blossom Edp Florales 30ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Olympea Blossom EDP 80ml _ Home Essentials.jpg" },
   { id: 398, nombre: "Paco  Rabanne Fame Edp  50ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Fame EDP.jpg" },
   { id: 399, nombre: "Paco Rabanne Ultraviolet Edp 80ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Ultraviolet 50ml Günstig Kaufen.jpg" },
-  { id: 400, nombre: "Paco Rabanne Olimpea Edp Blossom 30ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Olympea Blossom EDP 80ml _ Home Essentials.jpg" }
-  { id: 388, nombre: "Paco Rabanne Olimpea FLORA Edp INTENSE 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Olympea Flora Intense 50ml Eau De Parfum Edp Spray - Brand.jpg" }
+  { id: 400, nombre: "Paco Rabanne Olimpea Edp Blossom 30ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Olympea Blossom EDP 80ml _ Home Essentials.jpg" },
+  { id: 388, nombre: "Paco Rabanne Olimpea FLORA Edp INTENSE 100ml", precio: 50000, categoria: "mujer", imagen: "assets/img/Paco Rabanne Olympea Flora Intense 50ml Eau De Parfum Edp Spray - Brand.jpg" },
 ];
    // --- PARTE 3: Productos 401 al Final ---
 const lote3 = [
